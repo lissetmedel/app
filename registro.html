@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>REGISTRO</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="estilos.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+        <script src="funciones.js"></script>
+    </head>
+    <body>
+        <h1>Registro</h1>
+        <input type="text" placeholder="Nombre de Usuario" id="usuario">
+        <input type="email" placeholder="Correo" id="email">
+        <input type="password" placeholder="Contraseña" id="password">
+        <input type="password" placeholder="Confirmar Contraseña" id="password2">
+        
+        <p id="mensaje">Texto de relleno</p>
+        
+        <button onclick="registro()">Registrarme</button>
+        <div>
+            <p>o puedes Iniciar Sesión</p>
+        </div>
+    </body>
+    <script>
+        function registro(){
+            pass1 = document.getElementById('password').value;
+            pass2 = document.getElementById('password2').value;
+            if(pass1==pass2){
+                //alert('Las contraseñas coinciden');
+                usuario  =document.getElementById('usuario').value;
+                email = document.getElementById('email').value;
+                //guardar localmente
+                //setItem(llave , valor)
+                //localStorage.getItem('usuario'); <-- la llave  obtener un valor
+                localStorage.setItem('usuario', usuario);
+                localStorage.setItem('password', pass1);
+                localStorage.setItem('email', email);
+                
+                //mostrar mensaje
+                mensaje = document.getElementById('mensaje');
+                mensaje.style.opacity = "1";
+                mensaje.style.transition = ".6s all";
+                mensaje.innerHTML = "Usuario Registrado :)";
+                
+                //redirigir
+                setTimeout(
+                    function(){
+                      window.location.assign('login.html') 
+                    },3000);
+                
+            }//fin if
+            
+            else{
+                document.getElementById('password').style.border = "3px solid red";
+                document.getElementById('password2').style.border = "3px solid red";
+                //mostrar mensaje
+                mensaje = document.getElementById('mensaje');
+                mensaje.style.opacity = "1";
+                mensaje.style.transition = ".6s all";
+                mensaje.innerHTML = "Revisa tus contraseñas";
+            }//fin else
+        }//fin function
+    </script>
+</html>
